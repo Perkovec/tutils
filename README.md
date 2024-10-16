@@ -5,7 +5,7 @@ TUtils is a simple library with various helpers that can be used in terminal app
 ## Installation
 
 ```bash
-go get github.com/perkovec/tutils
+go get github.com/Perkovec/tutils
 ```
 
 ## Methods
@@ -19,7 +19,7 @@ package main
 
 import (
     "fmt"
-    "github.com/perkovec/tutils"
+    "github.com/Perkovec/tutils"
 )
 
 func main() {

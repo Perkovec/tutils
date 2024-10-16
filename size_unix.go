@@ -4,7 +4,6 @@ package tutils
 
 import (
 	"syscall"
-	"unsafe"
 
 	"golang.org/x/sys/unix"
 )
@@ -17,21 +16,13 @@ type winsize struct {
 }
 
 func getSize() (Size, error) {
-	size := winsize{}
-
-	_, _, err := syscall.Syscall(
-		syscall.SYS_IOCTL,
-		uintptr(syscall.Stdin),
-		uintptr(unix.TIOCGWINSZ),
-		uintptr(unsafe.Pointer(&size)),
-	)
-
-	if err != 0 {
+	size, err := unix.IoctlGetWinsize(syscall.Stdout, unix.TIOCGWINSZ)
+	if err != nil {
 		return Size{}, err
 	}
 
 	return Size{
-		Rows:    int(size.row),
-		Columns: int(size.col),
+		Rows:    int(size.Row),
+		Columns: int(size.Col),
 	}, nil
 }
